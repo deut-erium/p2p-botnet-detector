@@ -1,17 +1,14 @@
 # Botnet Detection
 
-## Team IITBreachers
-### Himanshu Sheoran
-### Lakshay Kumar
-
-## Submission format
+## Structure
 
 ### [botnetdetect.py](botnetdetect.py)
 The main program
 #### Usage
 
 ##### Botnet detection
-python3 botnetdetect.py <path to pcap file>
+Botnet detection works on pre-captured pcap file  
+`python3 botnetdetect.py <path to pcap file>`
 
 Processes pcap file to produce `extracted_features.csv` which contains the features extracted from the pcap
 > NOTE: feature extraction is slow depending upon the size of input pcap (approx 1 minute to process 10MB)
@@ -30,16 +27,16 @@ If no botnet is detected, the result would be
 **No Botnets detected** in a single line
 Otherwise
 
-**----------Detected Botnet Hosts----------** 
-host1
-host2
-...
-host n
-**----------Malicious Flows----------**
-source ip1:source port1 -> destination ip1:destination port1 ; protocol
-source ip2:source port2 -> destination ip2:destination port2 ; protocol
-...
-source ipn:source portn -> destination ipn:destination portn ; protocol
+**----------Detected Botnet Hosts----------**  
+host1  
+host2  
+...  
+host n  
+**----------Malicious Flows----------**  
+source ip1:source port1 -> destination ip1:destination port1 ; protocol  
+source ip2:source port2 -> destination ip2:destination port2 ; protocol  
+...  
+source ipn:source portn -> destination ipn:destination portn ; protocol  
 
 
 
@@ -57,19 +54,6 @@ sudo apt-get install -y tshark
 sudo apt-get install libmagic-dev
 pip3 install -r requirements.txt
 ```
-
-- wireshark
-- tshark
-- libmagic-dev
-- python3.8 (should work on 3.6 above)
-  - pyshark
-  - nest_asyncio
-  - python-magic
-  - numpy
-  - pandas
-  - tqdm
-  - sklearn
-
 
 ## Features used and extracted
 | Feature                    | description                              | is metadata?|
@@ -100,3 +84,8 @@ pip3 install -r requirements.txt
 |incoming_outgoing_ratio     | ratio of incoming vs outgoing data rate  |0|
 |num_small_packets           | number of small size packets transferred |0|
 |label                       | label of flow                            |1|
+
+
+## Contributors
+- Himanshu Sheoran @deut-erium
+- Lakshay Kumar @p0i5on8
