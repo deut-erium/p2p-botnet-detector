@@ -21,7 +21,6 @@ import pickle
 
 
 FLOW = {}
-HOSTS = {}
 
 def make_csv(filepath, savepath):
   """
@@ -61,10 +60,6 @@ def get_pcaps(base_path):
         pcap_list.append(file_name)
   return pcap_list
 
-# BOTNET_FILES = get_pcaps('Botnet_Detection_Dataset')
-# with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-#   executor.map(lambda x: make_csv(x, 'filtered_data'), BOTNET_FILES)
-# df = pd.read_csv('filtered_data/abc.csv',error_bad_lines=False)
 
 def byte_entropy(labels):
   ent = stats.entropy(list(Counter(labels).values()), base=2)
@@ -177,6 +172,15 @@ class HostInfo:
 
 
 def min_none(a,b):
+  """
+  Min(a,b), returns the other element if either of `a` or `b` is None
+
+  Args:
+      a: int or float value
+      b: int or float value
+  Returns:
+      minimum of a or b
+  """
   if not a:
     return b
   if not b:
@@ -184,6 +188,16 @@ def min_none(a,b):
   return min(a,b)
 
 def max_none(a,b):
+  """
+  Min(a,b), returns the other element if either of `a` or `b` is None
+
+  Args:
+      a: int or float value
+      b: int or float value
+  Returns:
+      minimum of a or b
+  """
+ 
   if not a:
     return b
   if not b:
@@ -199,8 +213,8 @@ class Flow:
     """
     initialize the source, destination host, ports and protocol
     """
-    self.src_ip = src_ip
-    self.src_port = src_port
+    self.src_ip = src_ip     #ip of source of flow
+    self.src_port = src_port # port used by source of flow
     self.dst_ip = dst_ip
     self.dst_port = dst_port
     self.protocol = protocol
