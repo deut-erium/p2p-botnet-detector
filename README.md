@@ -1,9 +1,11 @@
-# Botnet Detection
+# Peer to Peer Botnet Detection
+Detects infected hosts and identifies malicious traffic associated to the botnet from network dumps captured from a machine 
 
 ## Structure
 
 ### [botnetdetect.py](botnetdetect.py)
-The main program
+The main program for detecting botnet and training Machine Learning model for botnet detection  
+
 #### Usage
 
 ##### Botnet detection
