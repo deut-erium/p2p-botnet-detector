@@ -102,8 +102,8 @@ These are the key features used for detection, detailed analysis of different fe
 
 
 ## Contributors
-- Himanshu Sheoran @deut-erium
-- Lakshay Kumar @p0i5on8
+- Himanshu Sheoran [@deut-erium](https://github.com/deut-erium)
+- Lakshay Kumar [@p0i5on8](https://github.com/p0i5on8)
 
 ## TODO
 - [ ] Detailed analysis of different features
