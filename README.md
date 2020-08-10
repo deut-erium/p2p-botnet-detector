@@ -1,6 +1,16 @@
 # Peer to Peer Botnet Detection
 Detects infected hosts and identifies malicious traffic associated to the botnet from network dumps captured from a machine 
 
+### dependencies
+The program is tested on python3.8, not sure about other versions but is should work above 3.6.  
+Install the dependencies with the following set of commands
+```
+sudo apt-get install wireshark
+sudo apt-get install -y tshark
+sudo apt-get install libmagic-dev
+pip3 install -r requirements.txt
+```
+
 ## Structure
 
 ### [botnetdetect.py](botnetdetect.py)
@@ -17,47 +27,50 @@ Processes pcap file to produce `extracted_features.csv` which contains the featu
 
 results are stored in `output.txt`
 
+Analysis of more than one pcap files yet to be done, although the functionality has been written.  
+
 ##### Train model
-python3 botnetdetect.py train model_name
+`python3 botnetdetect.py train model_name`
 > Assumption: The current directory contains training data in directory `Botnet_Detection_Dataset`
 
 Generates filtered csv files in `filtered_data` directory in current working directory
 
+The training phase is very very slow given the feature extraction from pcap files is done with pyshark.  
+The parsing speed is around 10MB/minute (yet to be improved).
+
+Alternatively, training can be done on a prefiltered `training.csv` by running the command  
+`python3 botnetdetect.py no-filter-train <csv/for/training> model_name`
+
 #### Result format
-
-If no botnet is detected, the result would be
+The results are stored in `output.txt`  
+If no botnet is detected, the result would be 
 **No Botnets detected** in a single line
-Otherwise
+Otherwise, the contents of output.txt would be 
 
-**----------Detected Botnet Hosts----------**  
+```
+----------Detected Botnet Hosts----------
 host1  
 host2  
 ...  
 host n  
-**----------Malicious Flows----------**  
+----------Malicious Flows----------
 source ip1:source port1 -> destination ip1:destination port1 ; protocol  
 source ip2:source port2 -> destination ip2:destination port2 ; protocol  
 ...  
 source ipn:source portn -> destination ipn:destination portn ; protocol  
-
-
-
+```
 
 ### [trained_model.pickle](trained_model.pickle)
-pretrained model
+Pretrained model on `training.csv` files
 
 ### [training.csv](tranining.csv)
-csv file containing the features extracted from training data
+csv file containing the features extracted from training data.
+> NOTE: The provided csv is a very trimmed down version of training.csv (~1GB) due to github restrictions
 
-### [dependencies]
-```
-sudo apt-get install wireshark
-sudo apt-get install -y tshark
-sudo apt-get install libmagic-dev
-pip3 install -r requirements.txt
-```
 
 ## Features used and extracted
+These are the key features used for detection, detailed analysis of different features and some other features are yet to be explored.  
+
 | Feature                    | description                              | is metadata?|
 | -------                    | ------------                             | ----------- |
 |src_ip                      | source of flow                           |1|
@@ -91,3 +104,10 @@ pip3 install -r requirements.txt
 ## Contributors
 - Himanshu Sheoran @deut-erium
 - Lakshay Kumar @p0i5on8
+
+## TODO
+- [ ] Detailed analysis of different features
+- [ ] Plots of 
+- [ ] Analysis based on re-assembled stream contents. The various communications between <type of malware> independent flows
+- [ ] Analysis based on real-time packet captures
+- [ ] Listing out further stuff TODO
